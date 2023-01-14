@@ -1,7 +1,7 @@
 package app;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Collections;
 
 /**
  * This class is to allow the user to make and cancel purchases
@@ -34,9 +34,15 @@ public class ShoppingCart {
 		}
 	}
 	
+	public void emptyCart() {
+		cart.clear();
+		printCart();
+	}
+	
 	//Method to loop through Cart ArrayList to display items that have been added
 	public void printCart() {
 		System.out.println("Your shopping cart has the following items:");
+		Collections.sort(cart);
 		for (SalableProduct carts : cart) {
 			System.out.println(carts.getName());
 					}

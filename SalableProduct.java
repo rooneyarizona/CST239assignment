@@ -1,15 +1,16 @@
 package app;
 
 /**
- * Class for Salable Product including getters and setters for each property.
- * Superclass for Armor, Health and Weapon
+ * Abstract class for Salable Product including getters and setters for each
+ * property. Superclass for Armor, Health and Weapon
  * 
  * @author Alastair Sagar
  *
  */
-
-public abstract class SalableProduct {
-	// Class properties
+//Abstract class that cannot be changed when inherited
+public abstract class SalableProduct implements Comparable<SalableProduct> {
+	// Class properties with private variable visibility so they cannot be accessed
+	// outside class
 	private String name;
 	private String description;
 	private double price;
@@ -87,26 +88,36 @@ public abstract class SalableProduct {
 		this.quantity = quantity;
 	}
 
+	public int compareTo(SalableProduct o) {
+		int value = this.name.compareTo(o.name);
+		if (value == 0) {
+			return this.name.compareTo(o.name);
+		} else {
+			return value;
+		}
+	}
+
 	// toString method to convert object to String format
 	@Override
 	public String toString() {
 		return "Product Info: \n[Product Name:" + name + ", \nDescription:" + description + ", \nPrice: $" + price
 				+ ", \nQuantity:" + quantity + "]";
 	}
+
 	/**
 	 * Override equals method method so objects can be compared.
 	 */
 	@Override
-	 public boolean equals(Object obj) {
-	      if (this == obj)
-	         return true;
-	      if (obj == null)
-	         return false;
-	      if (getClass() != obj.getClass())
-	         return false;
-	      SalableProduct other = (SalableProduct) obj;
-	      return (this.name == other.name && this.quantity == other.quantity);
-	      
-	   }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SalableProduct other = (SalableProduct) obj;
+		return (this.name == other.name && this.quantity == other.quantity);
+
+	}
 
 }

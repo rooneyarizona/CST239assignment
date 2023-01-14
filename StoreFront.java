@@ -1,17 +1,19 @@
 package app;
 
 import java.util.Scanner;
-
 /**
- * @author Alastair Sagar Main driver method
+ * Main driver method to invoke inventory and user menu integrating shopping cart and inventory manager
  * 
+ * @author Alastair Sagar
+ *
  */
 public class StoreFront {
-	/**
-	 * Main driver method
-	 * 
-	 * @param args
-	 */
+	
+	/**public static void saveToFile(String filename, Car car, boolean append) {
+		
+	}
+	**/
+	
 	public static void main(String[] args) {
 		//Instance of InventoryManager created
 		InventoryManager im = new InventoryManager();
@@ -19,11 +21,12 @@ public class StoreFront {
 		ShoppingCart cart = new ShoppingCart();
 		Scanner scan = new Scanner(System.in);
 		//SalableProduct child class instances created for each product
-		Weapon gun = new Weapon("Gun", "This is a gun", 250.00, 100);
-		Weapon sword = new Weapon("Sword", "Medieval Sword", 1000.00, 25);
-		Armor shield = new Armor("Shield", "Protect against most weapons", 99.00, 10);
-		Armor helmet = new Armor("Helmet", "wear on head for protection", 59.00, 7);
-		Health health = new Health("Health", "Increase health by 20%", 30.00, 100);
+		Weapon gun = new Weapon("Gun", "This is a gun", 250.00, 100, 500, "Black");
+		Weapon sword = new Weapon("Sword", "Medieval Sword", 1000.00, 25, 300, "Silver");
+		Armor shield = new Armor("Shield", "Protect against most weapons", 99.00, 10, "Red", 65, 800);
+		Armor helmet = new Armor("Helmet", "wear on head for protection", 59.00, 7, "Silver", 50, 900);
+		Health health = new Health("Health", "Increase health by 20%", 30.00, 100, 20);
+		
 		//Products added to inventory manager ArrayList
 		im.addProduct(sword);
 		im.addProduct(shield);
@@ -34,15 +37,15 @@ public class StoreFront {
 		
 		int choice = 0;
 		int quantity = 1;
-		//User Menu to navigate to Inventory Manager and Shopping Cart
+		// Displays the name of the Store Front and a Welcome Message to the console.
 		boolean menu = true;
 		while(menu) {
-System.out.println("Welcome to the GCU Store!\n");
+System.out.println("Welcome to the GCU Game Store!\n");
 System.out.println("What would you like to do?");
 System.out.println("1. Inventory Manager\n2. Shopping Cart\n3. Close Program");
 
 choice =scan.nextInt();
-
+// Executes a desired Store Front action based on keyboard entry from the User.
 switch (choice) {
 case 1://Starts Inventory Manager Menu
 	im.startInventoryManager();
@@ -51,13 +54,15 @@ case 2://Starts Shopping Cart Menu
 boolean cartMenu = true;
 	
 	while(cartMenu) {
-	
+	//Displays a list of actions for the User to interact with the Store Front
+	//Displays appropriate detailed feedback and error messages to the User through the console.
 	System.out.println("What would you like to do?\n");
 	System.out.println("1: Make Purchase");
 	System.out.println("2: Cancel Purchase");
 	System.out.println("3: Show Shopping Cart Items");
-	System.out.println("4: Go to Inventory Manager");
-	System.out.println("5: Close Program");
+	System.out.println("4: Empty Shopping Cart");
+	System.out.println("5: Go to Inventory Manager");
+	System.out.println("6: Close Program");
 	
 	int startCart = 0;
 	startCart= scan.nextInt();
@@ -101,11 +106,14 @@ boolean cartMenu = true;
 	case 3://Will print all items in cart ArrayList
 		cart.printCart();
 		 break;
-	case 4:
+	case 4://Empty Shopping Cart contents
+		cart.emptyCart();
+		break;
+	case 5:
 		im.startInventoryManager();
 		cartMenu = false;
 		break;
-	case 5://Stops cart menu loop to close program
+	case 6://Stops cart menu loop to close program
 		cartMenu = false;
 		menu = false;
 		break;
@@ -118,6 +126,7 @@ case 3://Stops Store Menu loop to close program
 	break;
 	
 default:
+	//Error message for incorrect input
 	System.out.println("Invalid selection. Please select an option");
 	break;
 

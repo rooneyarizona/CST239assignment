@@ -1,5 +1,12 @@
 package app;
 
+/**
+ * Inventory Manager including methods to control invoked inventory from main method
+ * 
+ * @author Alastair Sagar
+ *
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
