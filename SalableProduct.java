@@ -7,6 +7,7 @@ package app;
  * @author Alastair Sagar
  *
  */
+
 //Abstract class that cannot be changed when inherited
 public abstract class SalableProduct implements Comparable<SalableProduct> {
 	// Class properties with private variable visibility so they cannot be accessed
@@ -17,13 +18,21 @@ public abstract class SalableProduct implements Comparable<SalableProduct> {
 	private int quantity;
 
 	/**
-	 * Constructor for SalableProduct
-	 * 
-	 * @param name
-	 * @param description
-	 * @param price
-	 * @param quantity
+	 *  
+	 * @param name - name of product
+	 * @param description - description of product
+	 * @param price - price of product
+	 * @param quantity - quantity of product available
 	 */
+	/**
+	 * Default Constructor
+	 */
+	public SalableProduct() {
+
+	}
+/**
+ * Constructor cannot be instantiated
+ */
 	public SalableProduct(String name, String description, double price, int quantity) {
 		super();
 		this.name = name;
@@ -88,6 +97,9 @@ public abstract class SalableProduct implements Comparable<SalableProduct> {
 		this.quantity = quantity;
 	}
 
+	/**
+	 * Method to compare salableproduct objects which will return ascending order arraylist for name
+	 */
 	public int compareTo(SalableProduct o) {
 		int value = this.name.compareTo(o.name);
 		if (value == 0) {
@@ -101,7 +113,7 @@ public abstract class SalableProduct implements Comparable<SalableProduct> {
 	@Override
 	public String toString() {
 		return "Product Info: \n[Product Name:" + name + ", \nDescription:" + description + ", \nPrice: $" + price
-				+ ", \nQuantity:" + quantity + "]";
+				+ ", \nQuantity:" + quantity + "]\n";
 	}
 
 	/**

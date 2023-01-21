@@ -1,11 +1,13 @@
 package app;
 
 /**
- * Subclass extending Salable Product with alternative class properties and getters and setters
+ * Subclass extending Salable Product with alternative class properties and
+ * getters and setters
  * 
  * @author Alastair Sagar
  *
  */
+
 public class Weapon extends SalableProduct {
 	/**
 	 * 
@@ -16,7 +18,16 @@ public class Weapon extends SalableProduct {
 	 */
 	private int power;
 	private String color;
+/**
+ * Default constructor
+ */
+	public Weapon() {
 
+	}
+	/**
+	 * 
+	 * Constructor to include all class properties
+	 */
 	public Weapon(String name, String description, double price, int quantity, int power, String color) {
 		super(name, description, price, quantity);
 		this.power = power;
@@ -24,7 +35,7 @@ public class Weapon extends SalableProduct {
 	}
 
 	/**
-	 * @return the power
+	 * @Getter to return the power
 	 */
 	public int getPower() {
 		return power;
@@ -49,6 +60,15 @@ public class Weapon extends SalableProduct {
 	 */
 	public void setColor(String color) {
 		this.color = color;
+	}
+/** 
+ * Override toString method to include all Weapon class properties
+ */
+	@Override
+	public String toString() {
+		return "Product Info: \n[Product Name:" + super.getName() + ", \nDescription:" + super.getDescription()
+				+ ", \nPrice: $" + super.getPrice() + ", \nPower:" + power + ", \nColor:" + color + ", \nQuantity:"
+				+ super.getQuantity() + "]\n";
 	}
 
 }

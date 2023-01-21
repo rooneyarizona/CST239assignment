@@ -14,38 +14,38 @@ public class ShoppingCart {
 	private ArrayList<SalableProduct> cart;
 
 	public ShoppingCart() {
-
 		this.cart = new ArrayList<>();
 	}
-	//Adds product to cart ArrayList and adjusts quantity using equals method override
+	// Adds product to cart ArrayList and adjusts quantity using equals method
 	public void addItem(SalableProduct product, int quantity) {
 		cart.add(product);
-		if (product.equals(product)) {
+		if (product.getName().equals(product.getName())) {
 			product.setQuantity(product.getQuantity() - quantity);
 			System.out.println(quantity + " " + product.getName() + "(s) have been added to your Shopping Cart");
 		}
 	}
-	//Removes product from cart ArrayList and adjusts quantity using equals method override
+	// Removes product from cart ArrayList and adjusts quantity using equals method
 	public void removeItem(SalableProduct product, int quantity) {
 		cart.remove(product);
-		if (product.equals(product)) {
+		if (product.getName().equals(product.getQuantity())) {
 			product.setQuantity(product.getQuantity() + quantity);
 			System.out.println(quantity + " " + product.getName() + "(s) have been removed from your Shopping Cart");
 		}
 	}
-	
+	//Clear all items in the shopping cart
 	public void emptyCart() {
 		cart.clear();
 		printCart();
 	}
-	
-	//Method to loop through Cart ArrayList to display items that have been added
+
+	// Method to loop through Cart ArrayList to display items that have been added
 	public void printCart() {
 		System.out.println("Your shopping cart has the following items:");
+		//Will sort array list in alphabetical order due to Comparable Interface
 		Collections.sort(cart);
-		for (SalableProduct carts : cart) {
-			System.out.println(carts.getName());
-					}
+		for (SalableProduct products : cart) {
+			System.out.println(products.getName());
+		}
 		System.out.println();
 	}
 
