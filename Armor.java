@@ -11,13 +11,13 @@ package app;
 public class Armor extends SalableProduct {
 	/**
 	 * 
-	 * @param name inherited from SalableProduct
+	 * @param name        inherited from SalableProduct
 	 * @param description inherited from SalableProduct
-	 * @param price inherited from SalableProduct
-	 * @param quantity inherited from SalableProduct
-	 * @param durability - unique to Armor class
-	 * @param protection - unique to Armor class
-	 * @param color - unique to Armor class
+	 * @param price       inherited from SalableProduct
+	 * @param quantity    inherited from SalableProduct
+	 * @param durability  - unique to Armor class
+	 * @param protection  - unique to Armor class
+	 * @param color       - unique to Armor class
 	 */
 	private int durability;
 	private int protection;
@@ -29,6 +29,7 @@ public class Armor extends SalableProduct {
 	public Armor() {
 
 	}
+
 	/**
 	 * Armor Constructor with all class properties
 	 */
@@ -38,7 +39,7 @@ public class Armor extends SalableProduct {
 		this.durability = durability;
 		this.color = color;
 		this.protection = protection;
-		
+
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class Armor extends SalableProduct {
 		this.color = color;
 	}
 
-	/** 
+	/**
 	 * Overrides toString method to include all Armor class properties
 	 */
 	@Override
@@ -93,4 +94,14 @@ public class Armor extends SalableProduct {
 				+ ", \nColor:" + color + ",\nQuantity:" + super.getQuantity() + "]\n";
 
 	}
+
+	@Override
+	public int compareTo(SalableProduct o) {
+		
+		return 0;
+	}
+
+	
+
+	
 }

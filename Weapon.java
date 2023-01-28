@@ -18,12 +18,14 @@ public class Weapon extends SalableProduct {
 	 */
 	private int power;
 	private String color;
-/**
- * Default constructor
- */
+
+	/**
+	 * Default constructor
+	 */
 	public Weapon() {
 
 	}
+
 	/**
 	 * 
 	 * Constructor to include all class properties
@@ -61,14 +63,25 @@ public class Weapon extends SalableProduct {
 	public void setColor(String color) {
 		this.color = color;
 	}
-/** 
- * Override toString method to include all Weapon class properties
- */
+
+	/**
+	 * Override toString method to include all Weapon class properties
+	 */
 	@Override
 	public String toString() {
 		return "Product Info: \n[Product Name:" + super.getName() + ", \nDescription:" + super.getDescription()
 				+ ", \nPrice: $" + super.getPrice() + ", \nPower:" + power + ", \nColor:" + color + ", \nQuantity:"
 				+ super.getQuantity() + "]\n";
 	}
+
+	@Override
+	public int compareTo(SalableProduct o) {
+	
+		return 0;
+	}
+
+	
+
+	
 
 }
