@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * @author Alastair Sagar
- *  A class implementing Comparator of type Salabale Product to sort collection
+ *  A class implementing Comparator of type Salable Product to sort collection
  *
  */
 public class NameSort implements Comparator<SalableProduct> {

@@ -1,28 +1,35 @@
 package app;
-
 /**
  * Inventory Manager including methods to control invoked inventory from main method
+ * 
  * 
  * @author Alastair Sagar
  *
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class InventoryManager {
-	//Generic List type Salabale Product
+	// Generic List type Salable Product
 	private List<SalableProduct> inventory;
-
+		
 	public InventoryManager() {
 		this.inventory = new ArrayList<>();
-	}
+		}
 
 	// Add all inventory json inventory using Collections
 	public void addProducts(List<SalableProduct> products) {
 		inventory.addAll(products);
+	}
+
+	public void addProduct(SalableProduct product) {
+		inventory.add(product);
 	}
 
 	// Removes SalableProduct to inventory ArrayList
@@ -31,7 +38,7 @@ public class InventoryManager {
 	}
 
 	// Outputs inventory in ascending order
-	public void getInventory() {
+	public synchronized void getInventory() {
 		Collections.sort(inventory, new NameSort());
 		for (SalableProduct inventory : inventory) {
 			System.out.println("There are " + inventory.getQuantity() + " " + inventory.getName() + "s that cost $"
@@ -39,7 +46,8 @@ public class InventoryManager {
 		}
 		System.out.println();
 	}
-	//Output inventory in descending order
+
+	// Output inventory in descending order
 	public void getInventoryDescending() {
 		Collections.sort(inventory, new NameDescending());
 		for (SalableProduct inventory : inventory) {
@@ -48,7 +56,8 @@ public class InventoryManager {
 		}
 		System.out.println();
 	}
-	//Output inventory by price in ascedning order
+
+	// Output inventory by price in ascending order
 	public void inventoryPrice() {
 		Collections.sort(inventory, new PriceSort());
 		for (SalableProduct inventory : inventory) {
@@ -56,7 +65,8 @@ public class InventoryManager {
 
 		}
 	}
-	//Output inventory by price in descending order
+
+	// Output inventory by price in descending order
 	public void inventoryPriceDescending() {
 		Collections.sort(inventory, new PriceDescending());
 		for (SalableProduct inventory : inventory) {
@@ -64,6 +74,35 @@ public class InventoryManager {
 
 		}
 	}
+
+	public List<SalableProduct> getInventoryList() {
+		return inventory;
+
+	}
+
+	public synchronized void addProduct(String jsonString) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode jsonNode = mapper.readTree(jsonString);
+
+			if (jsonNode.has("power")) {
+				Weapon weapon = mapper.treeToValue(jsonNode, Weapon.class);
+				this.inventory.add(weapon);
+			} else if (jsonNode.has("durability")) {
+				Armor armor = mapper.treeToValue(jsonNode, Armor.class);
+				this.inventory.add(armor);
+			} else if (jsonNode.has("boost")) {
+				Health health = mapper.treeToValue(jsonNode, Health.class);
+				this.inventory.add(health);
+			}
+
+		} catch (IOException e) {
+			System.out.println("Error Adding JSON Object. Please contact Alastair Sagar");
+			System.exit(1);
+		}
+	}
+
+	
 
 	// Inventory Management user menu using switch
 	public void startInventoryManager() {
@@ -73,14 +112,14 @@ public class InventoryManager {
 		System.out.println("Inventory Manager");
 
 		// While loop to keep menu active until exited
-		var scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		boolean inventoryMenu = true;
 		while (inventoryMenu) {
 			System.out.println("Please make a selection");
 			System.out.println("1: Show Full Inventory by Name");
 			System.out.println("2: Show Full Inventory by Price");
 			System.out.println("3: Go to Shopping Cart");
-			System.out.println("4: Close Program");
+
 			choice = scan.nextInt();
 
 			switch (choice) {
@@ -106,8 +145,7 @@ public class InventoryManager {
 				break;
 			case 3:
 				inventoryMenu = false;
-			case 4:
-				inventoryMenu = false;
+				scan.close();
 
 				break;
 			default:

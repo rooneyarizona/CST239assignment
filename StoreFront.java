@@ -1,58 +1,31 @@
 package app;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Main driver method to invoke inventory from json file and user menu
  * integrating shopping cart and inventory manager
  * 
  * @author Alastair Sagar
+ * @param
  *
  */
-public class StoreFront {
-
-	public static void main(String[] args) throws IOException, FileNotFoundException {
+public class StoreFront implements Runnable {
+	
+	@Override
+	public void run() {
 		// Instance of InventoryManager created
 		InventoryManager im = new InventoryManager();
 		// Instance of ShoppingCart created
 		ShoppingCart cart = new ShoppingCart();
-
-		// Initializes store inventory from JSON file.
-		List<SalableProduct> inventory = new ArrayList<>();
-		final String jsonFile = "inventory.json";
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			File file = new File(jsonFile);
-			JsonNode rootNode = mapper.readTree(file);
-
-			for (JsonNode node : rootNode) {
-				if (node.has("power")) {
-					Weapon weapon = mapper.treeToValue(node, Weapon.class);
-					inventory.add(weapon);
-				} else if (node.has("durability")) {
-					Armor armor = mapper.treeToValue(node, Armor.class);
-					inventory.add(armor);
-				} else if (node.has("boost")) {
-					Health health = mapper.treeToValue(node, Health.class);
-					inventory.add(health);
-				}
-			}
-		} catch (IOException e) {
-			//Exception handled to print error to user
-			System.out.println("There is an error with file input. Please contact Alastair Sagar!");
-			System.exit(1);
-		}
-		// iterates through inventory to add SalableProducts to InventoryManager
-		// ArrayList
+		// Creates new FileService instance`
+		FileService fileService = new FileService();
+		fileService.importJsonFile("inventory.json");
+		// Assigns full inventory with inventoryTest
+		List<SalableProduct> inventory = fileService.getInventory();
 		im.addProducts(inventory);
+		
 
 		try (Scanner scan = new Scanner(System.in)) {
 			int choice = 0;
@@ -62,7 +35,7 @@ public class StoreFront {
 			while (menu) {
 				System.out.println("Welcome to the GCU Game Store!\n");
 				System.out.println("What would you like to do?");
-				System.out.println("1. Inventory Manager\n2. Shopping Cart\n3. Close Program");
+				System.out.println("1. View Inventory\n2. Shopping Cart\n3. Close Program");
 
 				choice = scan.nextInt();
 				// Executes a desired Store Front action based on keyboard entry from the User.
@@ -89,7 +62,7 @@ public class StoreFront {
 						switch (startCart) {
 						case 1:
 							System.out.println("Which Item Would you like to add?");
-							System.out.println("1. Gun\n2: Sword\n3: Helmet\n4: Shield\n5: Health");
+							System.out.println("1. Gun\n2: Sword\n3: Shield\n4: Helmet\n5: Health");
 							int cartAdd = scan.nextInt();
 							System.out.println("How many do you want to buy?");
 							quantity = scan.nextInt();
@@ -167,4 +140,5 @@ public class StoreFront {
 		}
 
 	}
-}
+		
+	}
