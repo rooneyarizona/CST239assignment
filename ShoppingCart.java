@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -40,6 +41,10 @@ public class ShoppingCart {
 	public void emptyCart() {
 		cart.clear();
 		printCart();
+	}
+	//Returns ShoppingCart List
+	public List<SalableProduct> getCart() {
+	    return cart;
 	}
 
 	// Method to loop through Cart ArrayList to display items that have been added

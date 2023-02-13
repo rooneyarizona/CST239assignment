@@ -7,7 +7,6 @@ package app;
  * @author Alastair Sagar
  *
  */
-
 public class Weapon extends SalableProduct {
 	/**
 	 * 
@@ -15,6 +14,8 @@ public class Weapon extends SalableProduct {
 	 * @param description inherited from SalableProduct
 	 * @param price       inherited from SalableProduct
 	 * @param quantity    inherited from SalableProduct
+	 * @param power 
+	 * @param color
 	 */
 	private int power;
 	private String color;

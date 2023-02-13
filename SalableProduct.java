@@ -9,14 +9,13 @@ package app;
  */
 
 //Abstract class that cannot be changed when inherited
-public abstract class SalableProduct{
+public abstract class SalableProduct {
 	// Class properties with private variable visibility so they cannot be accessed
 	// outside class
 	private String name;
 	private String description;
 	private double price;
 	private int quantity;
-	
 
 	/**
 	 * 
@@ -41,7 +40,7 @@ public abstract class SalableProduct{
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
-		
+
 	}
 
 	/**
@@ -104,17 +103,16 @@ public abstract class SalableProduct{
 	 * Method to compare salableproduct objects which will return ascending order
 	 * arraylist for name
 	 */
-		
-		public int compareTo(SalableProduct o) {
-			int value = this.name.compareTo(o.name);
-			if (value == 0) {
-				return this.name.compareTo(o.name);
-			} else {
-				return value;
-			}
+
+	public int compareTo(SalableProduct o) {
+		int value = this.name.compareTo(o.name);
+		if (value == 0) {
+			return this.name.compareTo(o.name);
+		} else {
+			return value;
 		}
-		
-		
+	}
+
 	// toString method to convert object to String format
 	@Override
 	public String toString() {
@@ -133,7 +131,7 @@ public abstract class SalableProduct{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SalableProduct  other = (SalableProduct ) obj;
+		SalableProduct other = (SalableProduct) obj;
 		return (this.name == other.name && this.quantity == other.quantity);
 
 	}

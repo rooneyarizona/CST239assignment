@@ -7,7 +7,6 @@ package app;
  * @author Alastair Sagar
  *
  */
-
 public class Health extends SalableProduct {
 	/**
 	 * 

@@ -24,7 +24,7 @@ public class FileService {
 		this.inventory = new ArrayList<>();
 	}
 
-	public void importJsonFile(String jsonFile) {
+	public void importJsonFile(String jsonFile) throws IOException {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			File file = new File(jsonFile);
@@ -44,7 +44,7 @@ public class FileService {
 			}
 		} catch (IOException e) {
 			System.out.println("There is an error with file input. Please contact Alastair Sagar!");
-			System.exit(1);
+			throw e;
 		}
 	}
 

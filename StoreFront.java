@@ -1,5 +1,6 @@
 package app;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,7 +9,6 @@ import java.util.Scanner;
  * integrating shopping cart and inventory manager
  * 
  * @author Alastair Sagar
- * @param
  *
  */
 public class StoreFront implements Runnable {
@@ -21,7 +21,12 @@ public class StoreFront implements Runnable {
 		ShoppingCart cart = new ShoppingCart();
 		// Creates new FileService instance`
 		FileService fileService = new FileService();
-		fileService.importJsonFile("inventory.json");
+		try {
+			fileService.importJsonFile("inventory.json");
+		} catch (IOException e) {
+			System.out.println("There is an error with file input. Please contact Alastair Sagar!");
+			System.exit(1);
+		}
 		// Assigns full inventory with inventoryTest
 		List<SalableProduct> inventory = fileService.getInventory();
 		im.addProducts(inventory);
